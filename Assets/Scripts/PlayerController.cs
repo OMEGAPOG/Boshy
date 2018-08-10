@@ -20,6 +20,19 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        float speed = 2.5f;
+
+        if (Input.GetKey(KeyCode.A)) {
+            speed = 2.5f; //pressing A
+        }else if (Input.GetKey(KeyCode.D)) {
+            speed = -2.5f; //not pressing A, but pressing D
+        } else {
+            speed = 0; // not pressing A or D
+        }
+
+        rigid.velocity = new Vector2(speed, rigid.velocity.y); // move
+
+        /*
         //move left
         if (Input.GetKey(KeyCode.A))
         {
@@ -40,6 +53,7 @@ public class PlayerController : MonoBehaviour {
         {
             rigid.velocity = new Vector2(0, 0);
         }
+        */
 
         //jump
         if (isGrounded)
@@ -54,6 +68,9 @@ public class PlayerController : MonoBehaviour {
         if(Input.GetMouseButtonDown(0))
         {
             shoot = true;
+            GameObject bullet = Instantiate(bulletPrefab, position, rotation);
+            //bullet.GetComponent<RigidBody2D>().velocity = new Vector2(2000,0);
+            //etc....
         }
         Debug.Log(shoot);
         shoot = false;
